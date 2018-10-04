@@ -24,11 +24,12 @@ export const register = async ({ commit }, user) => {
   try {
     const response = await proxy.submit('post')
     if (response.error) {
-      commit(types.NOTIFICATION, {
-        type: 'ERROR',
-        title: 'REGISTERED USER',
-        message: response.error
-      })
+      console.log(response.error)
+      // commit(types.NOTIFICATION, {
+      //   type: 'ERROR',
+      //   title: 'REGISTERED USER',
+      //   message: response.error
+      // })
     } else {
       commit(types.LOGIN, response)
       await store.dispatch('account/me', response)

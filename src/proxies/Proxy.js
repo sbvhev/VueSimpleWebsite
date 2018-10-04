@@ -80,7 +80,7 @@ class Proxy {
    */
   submit (requestType, url, data = null) {
     return new Promise((resolve, reject) => {
-      Vue.$http[requestType](url + this.getParameterString() + '', data)
+      Vue.$http[requestType](this.endpoint + this.getParameterString() + '', data)
         .then(response => {
           resolve(response.data)
         })

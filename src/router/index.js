@@ -274,14 +274,5 @@ export default new Router({
         auth: true
       }
     },
-    {
-      path: '/',
-      redirect: '/auth'
-    },
-
-    {
-      path: '/*',
-      redirect: '/auth '
-    }
   ],
 })

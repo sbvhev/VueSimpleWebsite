@@ -1,67 +1,164 @@
 <template>
-  <div class="signup">
-    <h2>{{'auth.createNewAccount' | translate}}</h2>
-    <form method="post" action="/auth/signup" name="signup">
-      <div class="form-group">
-        <div class="input-group">
-          <input type="text" id="email" required="required"/>
-          <label class="control-label" for="email">{{'auth.email' | translate}}</label><i class="bar"></i>
-        </div>
+  <div class="form-wizard-page">
+    <div class="row">
+      <div class="col-md-12">
+        <vuestic-wizard :steps="hsSteps">
+          <div slot="page1" class="form-wizard-tab-content">
+            <Step1 ref="registerStepOne"></Step1>
+          </div>
+          <div slot="page2" class="form-wizard-tab-content">
+            <Step2 ref="registerStepTwo"></Step2>
+          </div>
+          <div slot="page3" class="form-wizard-tab-content">
+            <Step3 ref="registerStepThree"></Step3>
+          </div>
+          <div slot="wizardCompleted" class="form-wizard-tab-content">
+            <h4>{{'forms.wizard.completed' | translate}}</h4>
+            <p>
+              Zebras communicate with facial expressions and sounds. They make
+              loud braying or barking sounds and
+              soft snorting sounds. The position of their ears, how wide open
+              their eyes are, and whether they show
+              their teeth all send a signal. For example, ears flat back means
+              trouble, or "you better follow orders!"
+            </p>
+          </div>
+        </vuestic-wizard>
       </div>
-      <div class="form-group">
-        <div class="input-group">
-          <input type="password" id="password" required="required"/>
-          <label class="control-label" for="password">{{'auth.password' | translate}}</label><i class="bar"></i>
-        </div>
-      </div>
-      <vuestic-checkbox
-        :id="'checkbox1'"
-        v-model="checkboxOneModel">
-        <template slot="label">{{'auth.agree' | translate}}
-          <router-link to="">{{'auth.termsOfUse' | translate}}</router-link>
-        </template>
-      </vuestic-checkbox>
-      <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between down-container">
-        <button class="btn btn-primary" type="submit">
-          {{'auth.signUp' | translate}}
-        </button>
-        <router-link class='link' :to="{name: 'login'}">{{'auth.alreadyJoined' | translate}}</router-link>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'signup',
-    data () {
-      return {
-        checkboxOneModel: true
+import CountriesList from 'data/CountriesList'
+import Step1 from './steps/Step1'
+import Step2 from './steps/Step2'
+import Step3 from './steps/Step3'
+
+export default {
+  name: 'signup',
+  components: {
+    Step1,
+    Step2,
+    Step3
+  },
+  computed: {
+    hsSteps () {
+      return [
+        {
+          label: 'Personal Details',
+          slot: 'page1',
+          onNext: () => {
+            // this.$refs.registerStepOne.$validator.validateAll()
+          },
+          isValid: () => {
+            return this.$refs.registerStepOne.validate()
+
+            // return true
+          }
+        },
+        {
+          label: 'Employee Stipend',
+          slot: 'page2',
+          onNext: () => {
+            // this.$refs.registerStepOne.$validator.validateAll()
+          },
+          isValid: () => {
+            // return this.$refs.registerStepOne.$validator.validateAll()
+            return true
+          }
+        },
+        {
+          label: 'Credit Card',
+          slot: 'page3',
+          onNext: () => {
+            // this.$refs.registerStepOne.$validator.validateAll()
+          },
+          isValid: () => {
+            // return this.$refs.registerStepOne.$validator.validateAll()
+            return false
+          }
+        }
+      ]
+    }
+  },
+  data () {
+    return {
+      hsName: '',
+      hsCountry: '',
+      hrName: '',
+      hrCountry: '',
+      vrName: '',
+      vrCountry: '',
+      email: '',
+      countriesList: CountriesList,
+      chosenCountry: '',
+      user: {
+        userEmailAddress: '212@2.com',
+        userPassword: 'password'
+      },
+      submitted: false,
+      radioModel: 'option1',
+      radioDisabledModel: 'option4',
+      simpleOptions: [
+        {
+          id: 1,
+          description: 'First option'
+        },
+        {
+          id: 2,
+          description: 'Second option'
+        },
+        {
+          id: 3,
+          description: 'Third option'
+        }
+      ],
+      multiSelectModel: []
+    }
+  },
+  methods: {
+    isFormFieldValid (field) {
+      let isValid = false
+      if (this.formFields[field]) {
+        isValid =
+          this.formFields[field].validated && this.formFields[field].valid
       }
+      return isValid
+    },
+    validateFormField (fieldName) {
+      this.$validator.validate(fieldName, this[fieldName])
     }
   }
+}
 </script>
 
-<style lang="scss">
-  .signup {
-    @include media-breakpoint-down(md) {
-      width: 100%;
-      padding-right: 2rem;
-      padding-left: 2rem;
-      .down-container {
-        .link {
-          margin-top: 2rem;
-        }
-      }
-    }
-
-    h2 {
-      text-align: center;
-    }
-    width: 21.375rem;
-
-    .down-container {
-      margin-top: 2.6875rem;
+<style lang="scss" scoped>
+.widget.simple-vertical-wizard-widget {
+  .widget-body {
+    padding: 0 $widget-padding;
+    @include media-breakpoint-down(sm) {
+      padding: $widget-padding 0;
     }
   }
+}
+
+.form-wizard-page {
+  width: 100%;
+  .form-group {
+    min-width: 200px;
+    width: 100%;
+  }
+}
+
+.form-wizard-tab-content-text {
+  width: 100%; // IE11 only
+}
+
+.register-step3-form {
+  width: 100%;
+  padding-top: 10.7%;
+  padding-bottom: 11%;
+}
+
 </style>

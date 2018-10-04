@@ -1,7 +1,5 @@
 <template>
-  <div class="form-group with-icon-right dropdown select-form-group multiselect-form-group"
-       v-dropdown
-       :class="{'has-error': hasErrors()}">
+  <div class="form-group with-icon-right dropdown select-form-group multiselect-form-group" v-dropdown :class="{'has-error': hasErrors()}">
     <div class="input-group dropdown-toggle">
       <input
         readonly
@@ -13,17 +11,12 @@
       <i class="ion ion-ios-arrow-down icon-right input-icon dropdown-ion"></i>
     </div>
     <div v-if="isClearable">
-      <i
-        class="fa fa-close icon-cross icon-right input-icon multiselect-form-group__unselect"
-        @click="unselectOptions"
-      />
+      <i class="fa fa-close icon-cross icon-right input-icon multiselect-form-group__unselect" @click="unselectOptions" />
     </div>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <scrollbar ref="scrollbar">
         <div class="dropdown-menu-content">
-          <div class="dropdown-item"
-               :class="{'selected': isOptionSelected(option)}" v-for="option in options"
-               @click="toggleSelection(option)">
+          <div class="dropdown-item" :class="{'selected': isOptionSelected(option)}" v-for="option in options" @click="toggleSelection(option)">
             <span class="ellipsis">{{optionKey ? option[optionKey] : option}}</span>
             <i class="fa fa-check selected-icon"></i>
           </div>

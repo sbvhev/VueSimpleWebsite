@@ -352,7 +352,7 @@ export default {
   },
   created () {
     this.$nextTick(() => {
-      this.$validator.validateAll()
+      this.$validator.validate()
     })
   },
 }

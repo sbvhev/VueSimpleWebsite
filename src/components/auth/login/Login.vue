@@ -53,15 +53,11 @@ export default {
   methods: {
     async handleSubmit (e) {
       this.submitted = true
-      // try {
-      this.$validator.validate().then((result) => {
-
-      }).catch(() => {
-        console.log('error')
-      })
-      // } catch (e) {
-      //   console.log(e.message)
-      // }
+      try {
+        await this.$validator.validateAll() && this.$store.dispatch('auth/login', this.user)
+      } catch (e) {
+        console.log(e.message)
+      }
     }
   }
 }

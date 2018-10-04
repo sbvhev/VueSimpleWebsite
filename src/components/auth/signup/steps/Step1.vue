@@ -164,6 +164,9 @@ export default {
     },
     validateFormField (fieldName) {
       this.$validator.validate(fieldName, this[fieldName])
+    },
+    completedData () {
+      return this.$data
     }
   }
 }

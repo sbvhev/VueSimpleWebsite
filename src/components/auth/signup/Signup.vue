@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import CountriesList from 'data/CountriesList'
 import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
@@ -69,8 +68,15 @@ export default {
         {
           label: 'Credit Card',
           slot: 'page3',
-          isValid: () => {
-            // return this.$refs.registerStepOne.$validator.validateAll()
+          isValid: async () => {
+            const that = this.$refs.registerStepThree
+            try {
+              const stripeToken = await that.completedData()
+              this.mergePartialModels(stripeToken)
+              await this.$store.dispatch('auth/register', this.finalModel)
+            } catch (err) {
+              console.log(err)
+            }
             return false
           }
         }
@@ -83,17 +89,6 @@ export default {
     }
   },
   methods: {
-    isFormFieldValid (field) {
-      let isValid = false
-      if (this.formFields[field]) {
-        isValid =
-          this.formFields[field].validated && this.formFields[field].valid
-      }
-      return isValid
-    },
-    validateFormField (fieldName) {
-      this.$validator.validate(fieldName, this[fieldName])
-    },
     mergePartialModels (model) {
       this.finalModel = Object.assign({}, this.finalModel, model)
     },

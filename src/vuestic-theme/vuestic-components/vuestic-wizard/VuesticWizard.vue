@@ -38,7 +38,7 @@
         </div>
 
         <div class="btn-container" v-if="currentStep == steps.length - 1">
-          <button  class="btn btn-primary wizard-next pull-right final-step" @click.prevent="completeWizard()">
+          <button  class="btn btn-primary wizard-next pull-right final-step" @click.prevent="goNext()">
             {{lastStepLabel}}
           </button>
         </div>
@@ -66,7 +66,7 @@
         type: String,
         default: 'horizontal'
       },
-      lastStepLabel: {default: 'Confirm'},
+      lastStepLabel: {default: 'Signup'},
       onNext: {},
       onBack: {}
     },
@@ -109,8 +109,8 @@
       },
       goNext () {
         this.currentStepOnNext()
-        if (!this.isLastStep() && this.isCurrentStepValid()) {
-          this.currentStep++
+        if (this.isCurrentStepValid()) {
+          if (!this.isLastStep()) { this.currentStep++ }
         }
       },
       goBack () {

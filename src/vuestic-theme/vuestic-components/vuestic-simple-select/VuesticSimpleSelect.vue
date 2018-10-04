@@ -4,7 +4,6 @@
       <div class="input-group dropdown-toggle vuestic-simple-select__dropdown-toggle">
         <div>
           <input
-            readonly
             @focus="showDropdown()"
             :class="{'has-value': !!value}"
             v-model="displayValue"

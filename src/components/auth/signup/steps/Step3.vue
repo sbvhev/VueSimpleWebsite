@@ -47,12 +47,12 @@
     <div class="row">
       <div class="col-md-4">
         <fieldset>
-          <vuestic-simple-select label="Expiration Year" v-model="expYear" :options="['1','2','3','4','5','6','7','8','9','10','11','12']" />
+          <vuestic-simple-select label="Expiration Year" v-model="expYear" :options="['2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025']" />
         </fieldset>
       </div>
       <div class="col-md-4">
         <fieldset>
-          <vuestic-simple-select label="Expiration Month" v-model="expMonth" :options="['2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025']" />
+          <vuestic-simple-select label="Expiration Month" v-model="expMonth" :options="['1','2','3','4','5','6','7','8','9','10','11','12']" />
         </fieldset>
       </div>
       <div class="col-md-4">
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import stripeAsPromised from 'stripe-as-promised'
 
 export default {
   name: 'step1',
@@ -86,13 +87,12 @@ export default {
   },
   data () {
     return {
-      number: '',
+      number: '4242424242424242',
       expMonth: '12',
       expYear: '2018',
-      cvc: '',
+      cvc: '123',
       address_city: '',
       address_state: '',
-      show: true,
     }
   },
   methods: {
@@ -106,6 +106,25 @@ export default {
     },
     validateFormField (fieldName) {
       this.$validator.validate(fieldName, this[fieldName])
+    },
+    async completedData () {
+      window.Stripe.setPublishableKey('pk_test_UOMszFwb1QUTEO7ZLY2t6GXZ')
+      const stripe = stripeAsPromised(window.Stripe, Promise)
+      try {
+        const { id } = await stripe.card.createToken(this.$data)
+        return {
+          stripePaymentToken: id,
+        }
+      } catch ({ type, message }) {
+        // this.$store.dispatch('auth/notification', {
+        //   type: 'ERROR',
+        //   title: 'CARD ERROR',
+        //   message
+        // })
+        return {
+          stripePaymentToken: '',
+        }
+      }
     }
   }
 }

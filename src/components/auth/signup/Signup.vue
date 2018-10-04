@@ -74,6 +74,7 @@ export default {
               const stripeToken = await that.completedData()
               this.mergePartialModels(stripeToken)
               await this.$store.dispatch('auth/register', this.finalModel)
+              alert('success')
             } catch (err) {
               console.log(err)
             }

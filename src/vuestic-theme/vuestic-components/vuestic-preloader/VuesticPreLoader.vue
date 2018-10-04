@@ -80,7 +80,7 @@
     data () {
       return {
         points: require('./points.json'),
-        color: color(this.$store.state.app.config.palette.primary),
+        color: color(this.$store.getters['shared/palette'].primary),
         mainIndex: 7,
         context: {},
         radius: 4,

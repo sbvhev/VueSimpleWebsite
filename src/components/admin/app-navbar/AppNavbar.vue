@@ -3,14 +3,8 @@
   <vuestic-navbar>
     <header-selector slot="selector" :isOpen.sync="valueProxy"/>
     <span slot="logo" class="i-vuestic"></span>
-    <span slot="center">
-      {{$t('navbar.messageUs')}}&nbsp;<a href="mailto:hello@epicmax.co">hello@epicmax.co</a>
-    </span>
-    <message-dropdown/>
-    <notification-dropdown/>
-    <language-dropdown/>
     <profile-dropdown>
-      <img src="https://i.imgur.com/nfa5itq.png"/>
+      <img src="https://picsum.photos/300/200/?image=898"/>
     </profile-dropdown>
   </vuestic-navbar>
 

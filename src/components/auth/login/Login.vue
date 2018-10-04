@@ -44,8 +44,8 @@ export default {
   data () {
     return {
       user: {
-        userEmailAddress: '212@2.com',
-        userPassword: 'password'
+        userEmailAddress: 'test@gurtz.me',
+        userPassword: 'test'
       },
       submitted: false
     }

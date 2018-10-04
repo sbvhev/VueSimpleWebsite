@@ -14,8 +14,8 @@ import YmapPlugin from 'vue-yandex-maps'
 
 import './services/vuex'
 import './services/axios'
-import { router } from './services/vue-router'
 import './services/vuex-router-sync'
+import { router } from './services/vue-router'
 
 Vue.use(VuesticPlugin)
 Vue.use(YmapPlugin)

@@ -8,10 +8,10 @@
     <div class="dropdown-menu last">
       <div class="dropdown-menu-content">
         <div v-for="(option, id) in options" :key="id"
-          class="dropdown-item plain-link-item">
-          <router-link :to="{name: option.redirectTo}" class="plain-link" href="#">
+          class="dropdown-item plain-link-item" @click="logout">
+          <!-- <router-link :to="{name: option.redirectTo}" class="plain-link" href="#"> -->
             {{ `user.${option.name}` | translate}}
-          </router-link>
+          <!-- </router-link> -->
         </div>
       </div>
     </div>
@@ -27,16 +27,17 @@
         type: Array,
         default: () => [
           {
-            name: 'profile',
-            redirectTo: '',
-          },
-          {
             name: 'logout',
             redirectTo: 'login'
           }
         ]
       }
     },
+    methods: {
+      logout () {
+        this.$store.dispatch('auth/logout')
+      }
+    }
   }
 </script>
 

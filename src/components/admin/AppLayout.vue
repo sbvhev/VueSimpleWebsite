@@ -43,9 +43,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'isLoading'
-    ])
+    ...mapGetters({
+      isLoading: 'shared/isLoading'
+    })
   }
 }
 </script>

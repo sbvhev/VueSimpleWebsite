@@ -1,8 +1,8 @@
 {
-  "name": "vuestic-admin",
+  "name": "Vue project",
   "version": "1.7.0",
-  "description": "Vue.js admin template",
-  "author": "smartapant <smartapant@gmail.com>",
+  "description": "Simple Vue Project",
+  "author": "",
   "private": false,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -10,8 +10,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/epicmaxco/vuestic-admin.git"
+    "type": "git"
   },
   "license": "MIT",
   "dependencies": {

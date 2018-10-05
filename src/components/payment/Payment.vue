@@ -53,6 +53,8 @@ export default {
           const { stripePaymentToken } = stripeToken
           if (stripePaymentToken) {
             await this.updateApi(stripeToken)
+          } else {
+            this.isLoading = false
           }
         }
       } catch (err) {

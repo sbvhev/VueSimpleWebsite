@@ -10,10 +10,6 @@ export default {
       title: 'user',
       sortField: 'name'
     },
-    {
-      name: 'salary',
-      title: 'score'
-    }
   ],
   sortFunctions: {
     'name': function (item1, item2) {

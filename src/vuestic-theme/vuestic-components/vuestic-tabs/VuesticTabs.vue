@@ -4,7 +4,7 @@
       <nav class="nav nav-pills row">
         <div class="nav-item col" v-on:click="setActive(name)"
              :class="{active: name === currentActive}" v-for="name in names">
-          <span class="nav-link"><h5>{{name}}</h5></span>
+          <span class="nav-link"><h4>{{name}}</h4></span>
         </div>
       </nav>
       <div class="track"><div :class="underscoreClass"></div></div>

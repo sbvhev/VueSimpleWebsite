@@ -17,7 +17,8 @@ export default {
   },
   [LOGOUT] (state) {
     for (const key in state.me) {
-      state.me[key] = ''
+      if (key === 'planChoice') state.me[key] = '0'
+      else state.me[key] = ''
     }
   }
 }

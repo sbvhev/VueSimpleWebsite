@@ -21,7 +21,7 @@ export default {
   name: 'step2',
   data () {
     return {
-      planChoice: '0',
+      planChoice: this.$store.getters['account/myself'].planChoice,
     }
   },
   methods: {

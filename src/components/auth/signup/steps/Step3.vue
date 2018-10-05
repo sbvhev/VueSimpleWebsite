@@ -87,10 +87,10 @@ export default {
   },
   data () {
     return {
-      number: '4242424242424242',
+      number: '',
       expMonth: '12',
       expYear: '2018',
-      cvc: '123',
+      cvc: '',
       address_city: '',
       address_state: '',
     }
@@ -116,13 +116,13 @@ export default {
           stripePaymentToken: id,
         }
       } catch ({ type, message }) {
-        // this.$store.dispatch('auth/notification', {
-        //   type: 'ERROR',
-        //   title: 'CARD ERROR',
-        //   message
-        // })
+        this.$store.dispatch('auth/notification', {
+          type: 'ERROR',
+          title: 'CARD ERROR',
+          message
+        })
         return {
-          stripePaymentToken: '',
+          stripePaymentToken: null,
         }
       }
     }

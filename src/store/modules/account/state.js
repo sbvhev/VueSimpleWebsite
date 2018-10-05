@@ -12,7 +12,7 @@ export default {
     userLastName: '',
     userEmailAddress: '',
     companyName: '',
-    planChoice: '',
+    planChoice: '0',
     accessToken: ''
   }
 }

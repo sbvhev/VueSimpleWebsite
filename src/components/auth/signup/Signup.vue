@@ -2,7 +2,7 @@
   <div class="form-wizard-page">
     <div class="row">
       <div class="col-md-12">
-        <vuestic-wizard :steps="hsSteps">
+        <vuestic-wizard ref="wizard" :steps="hsSteps">
           <div slot="page1" class="form-wizard-tab-content">
             <Step1 ref="registerStepOne"></Step1>
           </div>
@@ -22,6 +22,7 @@
 import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'signup',
@@ -70,17 +71,46 @@ export default {
           slot: 'page3',
           isValid: async () => {
             const that = this.$refs.registerStepThree
-            try {
-              const stripeToken = await that.completedData()
-              this.mergePartialModels(stripeToken)
-              await this.$store.dispatch('auth/register', this.finalModel)
-            } catch (err) {
-              console.log(err)
+            Object.keys(that.formFields).map(field => {
+              that.validateFormField(field)
+            })
+            // validation check
+            const validOk = Object.keys(that.formFields).every(field => {
+              return that.isFormFieldValid(field)
+            })
+            if (validOk) {
+              try {
+                const stripeToken = await that.completedData()
+                const { stripePaymentToken } = stripeToken
+                if (stripePaymentToken) {
+                  this.mergePartialModels(stripeToken)
+                  await this.$store.dispatch('auth/register', this.finalModel)
+                }
+              } catch (err) {
+                console.log('extra error')
+              }
             }
             return false
           }
         }
       ]
+    },
+    ...mapGetters({
+      notification: 'auth/notificationInfo'
+    })
+  },
+  watch: {
+    notification: function (newVal, oldVal) {
+      if (newVal.title !== 'CARD ERROR') {
+        this.$refs.wizard.resetWizard()
+        let that = this.$refs.registerStepOne
+        that.$data.companyName = ''
+        that.$data.userEmailAddress = ''
+        Object.keys(that.formFields).map(field => {
+          that.validateFormField(field)
+        })
+      }
+      this.$store.dispatch('auth/notificationClear')
     }
   },
   data () {

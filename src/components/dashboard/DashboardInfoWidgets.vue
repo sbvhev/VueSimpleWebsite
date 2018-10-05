@@ -19,7 +19,7 @@
           <div class="stats">
             <div class="stats-number">
               <div>
-                <!-- <i class="i-vuestic-rich"></i> -->
+                <i class="fa fa-unsorted"></i>
               </div>
               3,800
             </div>
@@ -113,5 +113,9 @@ export default {
       left: -1.875rem;
     }
   }
+}
+
+.fa-line-chart {
+
 }
 </style>

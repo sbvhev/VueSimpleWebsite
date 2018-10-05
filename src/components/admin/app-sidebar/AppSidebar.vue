@@ -7,22 +7,30 @@
           <span>{{ $t('menu.dashboard') }}</span>
         </span>
       </sidebar-link>
-      <sidebar-link-group>
+      <sidebar-link
+        :to="{ name: 'plan' }">
         <span slot="title">
-          <span class="sidebar-menu-item-icon vuestic-icon vuestic-icon-statistics"></span>
-          <span>Profile</span>
+          <span
+            class="sidebar-menu-item-icon vuestic-icon vuestic-icon-statistics"></span>
+          <span>Plan</span>
         </span>
-        <sidebar-link :to="{ name: 'charts' }">
-          <span slot="title">
-            <span>Plan</span>
-          </span>
-        </sidebar-link>
-        <sidebar-link :to="{ name: 'progress-bars' }">
-          <span slot="title">
-            <span>Payment</span>
-          </span>
-        </sidebar-link>
-      </sidebar-link-group>
+      </sidebar-link>
+      <sidebar-link
+        :to="{ name: 'payment' }">
+        <span slot="title">
+          <span
+            class="sidebar-menu-item-icon fa fa-usd"></span>
+          <span>Payment</span>
+        </span>
+      </sidebar-link>
+      <sidebar-link
+        :to="{ name: 'users' }">
+        <span slot="title">
+          <span
+            class="sidebar-menu-item-icon vuestic-icon vuestic-icon-user"></span>
+          <span>Users</span>
+        </span>
+      </sidebar-link>
     </template>
   </vuestic-sidebar>
 </template>

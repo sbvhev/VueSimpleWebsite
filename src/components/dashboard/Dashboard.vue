@@ -29,6 +29,10 @@ export default {
     DashboardBottomWidgets
   },
 
+  mounted () {
+    console.log(this)
+  },
+
   methods: {
     launchEpicmaxToast () {
       this.showToast(`Let's work together!`, {

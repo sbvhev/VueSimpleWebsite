@@ -21,7 +21,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'app-layout',
-
+  computed: {
+    ...mapGetters({
+      isLoading: 'shared/isLoading'
+    })
+  },
   components: {
     VuesticLayout,
     AppNavbar,
@@ -40,11 +44,6 @@ export default {
     toggleSidebar (opened) {
       this.opened = opened
     }
-  },
-  computed: {
-    ...mapGetters({
-      isLoading: 'shared/isLoading'
-    })
   }
 }
 </script>

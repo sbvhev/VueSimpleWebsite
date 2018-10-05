@@ -11,12 +11,21 @@ import store from './store'
 import VuesticPlugin from 'vuestic-theme/vuestic-plugin'
 import './i18n'
 import YmapPlugin from 'vue-yandex-maps'
-
 import './services/vuex'
 import './services/axios'
 import './services/vuex-router-sync'
 import { router } from './services/vue-router'
 
+import CxltToastr from 'cxlt-vue2-toastr'
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
+const toastrConfigs = {
+  position: 'top right',
+  hideDuration: 800,
+  timeOut: 3000,
+  showMethod: 'fadeInRight',
+  hideMethod: 'fadeOutDown'
+}
+Vue.use(CxltToastr, toastrConfigs)
 Vue.use(VuesticPlugin)
 Vue.use(YmapPlugin)
 

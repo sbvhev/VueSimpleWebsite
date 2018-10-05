@@ -10,6 +10,18 @@ import Vue from 'vue'
 import store from '@/store'
 import * as types from './mutation-types'
 import Proxy from '@/proxies/Proxy'
+import CxltToastr from 'cxlt-vue2-toastr'
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
+
+const toastrConfigs = {
+  position: 'top right',
+  hideDuration: 800,
+  timeOut: 3000,
+  showMethod: 'fadeInRight',
+  hideMethod: 'fadeOutDown'
+}
+
+Vue.use(CxltToastr, toastrConfigs)
 
 export const check = ({ commit }) => {
   commit(types.CHECK)
@@ -24,12 +36,11 @@ export const register = async ({ commit }, user) => {
   try {
     const response = await proxy.submit('post')
     if (response.error) {
-      console.log(response.error)
-      // commit(types.NOTIFICATION, {
-      //   type: 'ERROR',
-      //   title: 'REGISTERED USER',
-      //   message: response.error
-      // })
+      commit(types.NOTIFICATION, {
+        type: 'ERROR',
+        title: 'REGISTERED USER',
+        message: response.error
+      })
     } else {
       commit(types.LOGIN, response)
       await store.dispatch('account/me', response)

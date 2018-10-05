@@ -1,12 +1,18 @@
 <template>
   <div id="app" class="app">
     <router-view />
+    <Notification></Notification>
   </div>
 </template>
 
 <script>
+import Notification from '@/components/Notification'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Notification: Notification
+  }
 }
 </script>
 

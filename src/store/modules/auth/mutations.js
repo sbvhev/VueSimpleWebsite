@@ -41,7 +41,7 @@ export default {
   [LOGOUT] (state) {
     state.authenticated = false
     localStorage.removeItem('id_token')
-    Vue.$http.defaults.headers.common.Authorization = ''
+    delete Vue.$http.defaults.headers.common.Authorization
   },
 
   [PROCESSING] (state, value) {

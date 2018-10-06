@@ -85,6 +85,7 @@ export default {
                 if (stripePaymentToken) {
                   this.mergePartialModels(stripeToken)
                   await this.$store.dispatch('auth/register', this.finalModel)
+                  this.finalModel = []
                 }
               } catch (err) {
                 console.log('extra error')

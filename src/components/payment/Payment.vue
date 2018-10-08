@@ -2,8 +2,17 @@
   <div class="row">
     <div class="col-md-12 d-flex">
       <vuestic-pre-loader v-show="isLoading" class="pre-loader"></vuestic-pre-loader>
-      <vuestic-widget :headerText="'Payment Update'" class="chat-widget">
-        <Payment ref="updatePayment"></Payment>
+      <vuestic-widget :headerText="'Please choose one of below payments...'" class="chat-widget">
+        <vuestic-tabs
+          :names="['Credit card payment', 'ACH payment']"
+          ref="tabs">
+          <div :slot="'Credit card payment'">
+            <CardPayment ref="card_payment"></CardPayment>
+          </div>
+          <div :slot="'ACH payment'">
+            <AchPayment ref="ach_payment"></AchPayment>
+          </div>
+        </vuestic-tabs>
         <br />
         <div class="row">
           <div class="col-md-3"></div>
@@ -21,13 +30,15 @@
 </template>
 
 <script>
-import Payment from './options/ach-payment'
+import AchPayment from './options/ach-payment'
+import CardPayment from '../auth/signup/steps/step3'
 import Proxy from '@/proxies/Proxy'
 
 export default {
   name: 'payment',
   components: {
-    Payment
+    CardPayment,
+    AchPayment
   },
   data () {
     return {
@@ -37,8 +48,12 @@ export default {
   },
   methods: {
     async handleUpdate () {
-      const that = this.$refs.updatePayment
+      let that = ''
+      if (this.$refs.tabs.currentActive === 'Credit card payment') {
+        that = this.$refs.card_payment
+      } else { that = this.$refs.ach_payment }
 
+      console.log(that)
       Object.keys(that.formFields).map(field => {
         that.validateFormField(field)
       })
@@ -131,5 +146,10 @@ export default {
       width: 100%;
     }
   }
+}
+
+.vuestic-tabs {
+  padding-left: 4%;
+  padding-right: 4%;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <form class="register-step3-form">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-12">
         <fieldset>
           <div class="form-group with-icon-right" :class="{'has-error': errors.has('name'), 'valid': isFormFieldValid('name')}">
             <div class="input-group">
@@ -21,27 +21,13 @@
         </fieldset>
       </div>
     </div>
-    <!-- <div class="row">
+    <div class="row">
       <div class="col-md-12">
         <fieldset>
-          <div class="form-group with-icon-right" :class="{'has-error': errors.has('number'), 'valid': isFormFieldValid('number')}">
-            <div class="input-group">
-              <input
-              name="number"
-              data-vv-as="Credit Card Number"
-              v-model="number"
-              v-validate="'required'"
-              required />
-              <i class="fa fa-check valid-icon icon-right input-icon"></i>
-              <label class="control-label">Credit Card Number</label><i class="bar"></i>
-              <small v-show="errors.has('number')" class="help text-danger">
-                {{ errors.first('number') }}
-              </small>
-            </div>
-          </div>
+          <vuestic-simple-select label="type" v-model="type" :options="['individual', 'company']" />
         </fieldset>
       </div>
-    </div> -->
+    </div>
     <div class="row">
       <div class="col-md-12">
           <div class="form-group with-icon-right" :class="{'has-error': errors.has('routing_number'), 'valid': isFormFieldValid('routing_number')}">

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Payment from '../auth/signup/steps/Step3'
+import Payment from './options/ach-payment'
 import Proxy from '@/proxies/Proxy'
 
 export default {

@@ -109,7 +109,6 @@ export default {
       }
       try {
         const { id } = await stripe.bankAccount.createToken(data)
-        console.log(id)
         return {
           stripePaymentToken: id,
         }

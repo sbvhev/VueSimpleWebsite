@@ -62,9 +62,6 @@ export default {
       ]
     }
   },
-  mounted () {
-    console.log(this.posts)
-  },
   methods: {
     async initalization () {
       const me = this.$store.getters['account/myself']

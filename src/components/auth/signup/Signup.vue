@@ -88,7 +88,11 @@ export default {
                   this.finalModel = []
                 }
               } catch (err) {
-                console.log('extra error')
+                this.$store.dispatch('auth/notification', {
+                  type: 'ERROR',
+                  title: 'SERVER ERROR',
+                  message: 'Oops, Please try again later.'
+                })
               }
             }
             return false

@@ -56,7 +56,6 @@ export default {
     },
     hanldeUpdate () {
       this.isLoading = true
-      console.log(this.isLoading)
       const that = this.$refs.updatePlan
       const { planChoice } = that.$data
       this.updateApi(planChoice)

@@ -71,7 +71,11 @@ export default {
           this.isLoaded = true
         }
       } catch (error) {
-        console.log('data-visualisation-tab', error)
+        this.$store.dispatch('auth/notification', {
+          type: 'ERROR',
+          title: 'SERVER ERROR',
+          message: 'Oops, Please try again later.'
+        })
       }
     },
 

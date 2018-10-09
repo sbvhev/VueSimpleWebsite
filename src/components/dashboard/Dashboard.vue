@@ -4,9 +4,12 @@
     <dashboard-info-widgets></dashboard-info-widgets>
 
     <vuestic-widget class="no-padding no-v-padding">
-      <vuestic-tabs :names="['Studio Usage & Users']" ref="tabs">
-        <div :slot="$t('Studio Usage & Users')">
+      <vuestic-tabs :names="['Studio Usage', 'Users']" ref="tabs">
+        <div :slot="$t('Studio Usage')">
           <studio-and-users></studio-and-users>
+        </div>
+        <div :slot="$t('Users')">
+          <users-table-tab></users-table-tab>
         </div>
       </vuestic-tabs>
     </vuestic-widget>
@@ -19,6 +22,7 @@
 <script>
 import DashboardInfoWidgets from './DashboardInfoWidgets'
 import StudioAndUsers from './dashboard-middle-content/DataVisualisation.vue'
+import UsersTableTab from './dashboard-middle-content/UsersTableTab.vue'
 import DashboardBottomWidgets from './DashboardBottomWidgets.vue'
 
 export default {
@@ -26,7 +30,8 @@ export default {
   components: {
     StudioAndUsers,
     DashboardInfoWidgets,
-    DashboardBottomWidgets
+    DashboardBottomWidgets,
+    UsersTableTab
   },
 
   methods: {

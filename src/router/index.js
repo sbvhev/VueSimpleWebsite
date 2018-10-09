@@ -64,7 +64,7 @@ export default new Router({
         {
           name: 'users',
           path: 'users',
-          component: lazyLoading('users/users'),
+          component: lazyLoading('users/Users'),
         },
         {
           name: 'payment',

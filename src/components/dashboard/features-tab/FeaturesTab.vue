@@ -49,7 +49,42 @@
 
 <script>
 export default {
-  name: 'features-tab'
+  name: 'features-tab',
+  created () {
+    this.initalization()
+  },
+
+  data () {
+    return {
+      statsDatas: []
+    }
+  },
+
+  methods: {
+    async initalization () {
+      const me = this.$store.getters['account/myself']
+      try {
+        const { userId, accessToken } = me
+        const { error, stats } = await new Proxy('getStats.php?', {
+          userId,
+          accessToken
+        }).submit('get')
+        if (error) {
+          this.statsDatas = []
+        } else {
+          this.statsDatas = stats
+          this.isLoaded = true
+        }
+      } catch (error) {
+        this.$store.dispatch('auth/notification', {
+          type: 'ERROR',
+          title: 'SERVER ERROR',
+          message: 'Oops, Please try again later.'
+        })
+      }
+    },
+
+  },
 }
 </script>
 

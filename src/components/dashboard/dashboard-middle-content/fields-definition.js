@@ -7,7 +7,7 @@ export default {
     },
     {
       name: 'name',
-      title: 'user',
+      title: 'name',
       sortField: 'name'
     },
   ],

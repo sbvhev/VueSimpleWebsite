@@ -1,14 +1,14 @@
 <template>
-  <div class="row dashboard-info-widgets">
+  <div v-if="isLoaded" class="row dashboard-info-widgets">
     <div class="col-md-6 col-xl-3">
       <vuestic-widget class="info-widget brand-primary">
         <div class="info-widget-inner">
           <div class="stats">
             <h1 class="stats-number">
               <!-- <i class="ion ion-md-arrow-up text-primary stats-icon"></i> -->
-              49
+              {{ statsDatas[0]['value'] }}
             </h1>
-            <div class="stats-title">Active Users</div>
+            <div class="stats-title">{{ statsDatas[0]['description'] }}</div>
           </div>
         </div>
       </vuestic-widget>
@@ -21,9 +21,9 @@
               <div>
                 <i class="fa fa-unsorted"></i>
               </div>
-              3,800
+              {{ statsDatas[1]['value'] }}
             </div>
-            <div class="stats-title">Avg/Steps Today</div>
+            <div class="stats-title">{{ statsDatas[1]['description'] }}</div>
           </div>
         </div>
       </vuestic-widget>
@@ -34,9 +34,9 @@
           <div class="info-widget-inner has-chart">
             <div class="stats">
               <div class="stats-number">
-                $1,900
+                {{ statsDatas[2]['value'] }}
               </div>
-              <div class="stats-title">Spent this month</div>
+              <div class="stats-title">{{ statsDatas[2]['description'] }}</div>
             </div>
             <div class="chart-container">
               <vuestic-progress-bar type="circle" :value="70" theme="Gray" backgroundTheme="Primary" />
@@ -51,9 +51,9 @@
           <div class="stats">
             <div class="stats-number">
               <!-- <i class="ion ion-md-people stats-icon icon-wide"></i> -->
-              56
+              {{ statsDatas[3]['value'] }}
             </div>
-            <div class="stats-title">Classes this month</div>
+            <div class="stats-title">{{ statsDatas[3]['description'] }}</div>
           </div>
         </div>
       </vuestic-widget>
@@ -62,8 +62,43 @@
 </template>
 
 <script>
+import Proxy from '@/proxies/Proxy'
+
 export default {
-  name: 'dashboard-info-widgets'
+  name: 'dashboard-info-widgets',
+  created () {
+    this.initalization()
+  },
+  data () {
+    return {
+      statsDatas: [],
+      isLoaded: false
+    }
+  },
+  methods: {
+    async initalization () {
+      const me = this.$store.getters['account/myself']
+      try {
+        const { userId, accessToken } = me
+        const { error, stats } = await new Proxy('getStats.php?', {
+          userId,
+          accessToken
+        }).submit('get')
+        if (error) {
+          this.statsDatas = []
+        } else {
+          this.statsDatas = stats
+          this.isLoaded = true
+        }
+      } catch (error) {
+        this.$store.dispatch('auth/notification', {
+          type: 'ERROR',
+          title: 'SERVER ERROR',
+          message: 'Oops, Please try again later.'
+        })
+      }
+    },
+  }
 }
 </script>
 

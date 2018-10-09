@@ -1,13 +1,13 @@
 <template>
   <div class="data-visualisation-tab dashboard-tab">
     <div class="row">
-      <div class="col-md-4">
-        <div class="chart-container">
+      <div class="col-md-6">
+        <div class="chart-container" v-if="isLoaded">
           <vuestic-chart v-bind:data="donutChartData" type="donut"></vuestic-chart>
         </div>
       </div>
       <vuestic-pre-loader v-show="!isLoaded" class="pre-loader"></vuestic-pre-loader>
-      <div class="col-md-8" v-if="isLoaded">
+      <div class="col-md-6" v-if="isLoaded">
         <vuestic-data-table :apiMode="apiMode" :tableData="tableData" :tableFields="tableFields" :itemsPerPage="itemsPerPage" :onEachSide="onEachSide" :sortFunctions="sortFunctions" :dataModeFilterableFields="dataModeFilterableFields" />
       </div>
     </div>
@@ -17,7 +17,6 @@
 <script>
 import Vue from 'vue'
 import BadgeColumn from 'components/users/BadgeColumn.vue'
-import DonutChartData from './DonutChartData'
 import FieldsDef from './fields-definition'
 import TableData from './TableData'
 import Proxy from '@/proxies/Proxy'
@@ -34,7 +33,15 @@ export default {
   data () {
     return {
       isLoaded: false,
-      donutChartData: DonutChartData,
+      donutChartData: {
+        labels: [],
+        datasets: [{
+          label: 'Population (millions)',
+          backgroundColor: [],
+          data: []
+        }]
+      },
+      // donutChartData: DonutChartData,
       apiMode: false,
       sortFunctions: FieldsDef.sortFunctions,
       tableData: TableData,
@@ -49,37 +56,44 @@ export default {
           value: 6
         }
       ],
-      tempData: []
+      tempData: [],
     }
   },
-
   methods: {
     async initalization () {
       const me = this.$store.getters['account/myself']
       try {
         const { userId, accessToken } = me
-        const { error, users } = await new Proxy('getUsers.php?', {
+        const { error, usage } = await new Proxy('getUsage.php?', {
           userId,
           accessToken
         }).submit('get')
         if (error) {
-          this.statsDatas = []
+          this.tableData = []
         } else {
-          this.tableData = { data: users }
-          const elements = Object.keys(users[0]).filter(
-            ele => ele !== 'name'
-          ).map((ele, index) => ({
-            name: ele,
-            title: `value-${index + 1}`
-          }))
-          this.tableFields = [...FieldsDef.tableFields, ...elements]
+          this.tableData = { data: usage }
+          this.normaliztion(usage)
+          this.tableFields = [...FieldsDef.tableFields, 'print_amount']
           this.isLoaded = true
         }
       } catch (error) {
-        console.log('data-visualisation-tab', error)
+        this.$store.dispatch('auth/notification', {
+          type: 'ERROR',
+          title: 'SERVER ERROR',
+          message: 'Oops, Please try again later.'
+        })
       }
     },
-
+    normaliztion (data) {
+      const palette = this.$store.getters['shared/palette']
+      const colorType = [palette.info, palette.warning, palette.primary, palette.fontColor]
+      for (const index in data) {
+        const ele = data[index]
+        this.donutChartData.labels = [...this.donutChartData.labels, ele.name]
+        this.donutChartData.datasets[0].backgroundColor = [...this.donutChartData.datasets[0].backgroundColor, colorType[index % 4]]
+        this.donutChartData.datasets[0].data = [...this.donutChartData.datasets[0].data, ele.value]
+      }
+    }
   },
 }
 </script>

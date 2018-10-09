@@ -1,5 +1,5 @@
 <template>
-  <div class="row bottom-widgets">
+  <div v-if="isLoaded" class="row bottom-widgets">
     <div class="col-md-6 d-flex">
       <vuestic-widget class="no-h-padding no-v-padding">
         <vuestic-feed :initialPosts="posts"></vuestic-feed>
@@ -14,34 +14,23 @@
 </template>
 
 <script>
+import Proxy from '@/proxies/Proxy'
+
 export default {
   name: 'dashboard-bottom-widgets',
-
+  created () {
+    this.initalization()
+  },
   data () {
     return {
-      posts: [
-        {
-          name: 'Irina Myatelskaya',
-          text: 'joined the network',
-          photoURL: 'https://i.imgur.com/VuTDC8u.png'
-        },
-        {
-          name: 'Andrei Hrabouski',
-          text: 'has just started a live video',
-          photoURL: 'https://i.imgur.com/W3mGrmW.png'
-        },
-        {
-          name: 'Evan You',
-          text: 'joined the network',
-          photoURL: 'https://i.imgur.com/D7DOGBH.jpg'
-        }
-      ],
+      posts: [],
+      isLoaded: false,
       news: [
         {
           photoURL: 'https://i.imgur.com/PiTDDcA.png'
         },
         {
-          photoURL: 'https://i.imgur.com/M6GugaM.png'
+          photoURL: 'https://i.imgur.com/ZXRIHfk.png'
         },
         {
           photoURL: 'https://i.imgur.com/vEy3fRU.png'
@@ -72,6 +61,34 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    console.log(this.posts)
+  },
+  methods: {
+    async initalization () {
+      const me = this.$store.getters['account/myself']
+      try {
+        const { userId, accessToken } = me
+        const { error, feed } = await new Proxy('getFeed.php?', {
+          userId,
+          accessToken
+        }).submit('get')
+
+        if (error) {
+          this.posts = []
+        } else {
+          this.posts = feed.splice(0, 3)
+          this.isLoaded = true
+        }
+      } catch (error) {
+        this.$store.dispatch('auth/notification', {
+          type: 'ERROR',
+          title: 'SERVER ERROR',
+          message: 'Oops, Please try again later.'
+        })
+      }
+    },
   }
 }
 </script>

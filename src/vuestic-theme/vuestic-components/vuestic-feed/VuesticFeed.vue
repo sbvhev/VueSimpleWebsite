@@ -1,10 +1,10 @@
 <template>
   <div class="vuestic-feed">
     <div v-if="posts.length == 0" class="empty">Your feed is empty.</div>
-    <div class="post" v-for="post in posts" :class="{last: posts.indexOf(post) === posts.length - 1}">
-      <div class="photo-container"><div class="photo" :style="`background: url(${post.photoURL})`"></div></div>
+    <div class="post" v-for="post in posts" :class="{last: posts.indexOf(post) === posts.length - 1}" :key="post">
+      <div class="photo-container"></div>
       <div class="underscored">
-        <span class="text"><span class="name">{{post.name}}</span> {{post.text}}.</span>
+        <span class="text">{{post}}</span>
         <button v-on:click="removePost(post)" class="btn btn-micro btn-primary btn-with-icon close-btn rounded-icon">
           <i class="ion-md-close ion"></i>
         </button>

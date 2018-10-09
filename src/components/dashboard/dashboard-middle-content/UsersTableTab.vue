@@ -65,7 +65,7 @@ export default {
             ele => ele !== 'name'
           ).map((ele, index) => ({
             name: ele,
-            title: `value-${index + 1}`
+            title: ele
           }))
           this.tableFields = [...FieldsDef.tableFields, ...elements]
           this.isLoaded = true

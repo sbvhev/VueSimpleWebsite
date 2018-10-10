@@ -1,14 +1,23 @@
 <template>
   <div class="vuestic-pre-loader">
-    <canvas ref="canvas"></canvas>
+    <spring-spinner
+      :animation-duration="2000"
+      :size="100"
+      color="#4ae387"
+    ></spring-spinner>
+    <!-- <canvas ref="canvas"></canvas> -->
   </div>
 </template>
 
 <script>
   import {color, lightness} from 'kewler'
+  import { SpringSpinner } from 'epic-spinners'
 
   export default {
     name: 'vuestic-pre-loader',
+    components: {
+      SpringSpinner
+    },
     methods: {
       getPrevious (index) {
         if (index === 0) return this.points.length - 1
@@ -54,7 +63,7 @@
       },
       update () {
         this.calculate()
-        this.draw()
+        // this.draw()
       },
       animate () {
         this.interval = setInterval(this.update, 30)

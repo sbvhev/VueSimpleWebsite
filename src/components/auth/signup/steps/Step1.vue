@@ -145,12 +145,12 @@ export default {
   },
   data () {
     return {
-      companyName: 'test',
-      userFirstName: 'test',
-      userLastName: 'test',
-      userEmailAddress: 'test@gurtz.me',
-      userPassword: 'test',
-      passwordConfirm: 'test'
+      companyName: '',
+      userFirstName: '',
+      userLastName: '',
+      userEmailAddress: '',
+      userPassword: '',
+      passwordConfirm: ''
     }
   },
   methods: {

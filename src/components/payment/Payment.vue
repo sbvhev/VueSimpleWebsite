@@ -35,7 +35,7 @@ import CardPayment from '../auth/signup/steps/step3'
 import Proxy from '@/proxies/Proxy'
 
 export default {
-  name: 'payment',
+  name: 'Payment',
   components: {
     CardPayment,
     AchPayment

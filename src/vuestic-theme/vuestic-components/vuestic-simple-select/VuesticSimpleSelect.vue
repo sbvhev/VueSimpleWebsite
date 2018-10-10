@@ -8,7 +8,8 @@
             :class="{'has-value': !!value}"
             v-model="displayValue"
             :name="name"
-            :options="options">
+            :options="options"
+            id="selectInput">
           <label class="control-label">{{label}}</label><i class="bar" />
           <small v-show="hasErrors()" class="help text-danger">
             {{ showRequiredError() }}
@@ -22,7 +23,7 @@
       <div class="dropdown-menu vuestic-simple-select__dropdown-menu" aria-labelledby="dropdownMenuButton">
         <scrollbar ref="scrollbar">
           <div class="dropdown-menu-content vuestic-simple-select__dropdown-menu-content">
-            <div class="dropdown-item vuestic-simple-select__dropdown-item" v-for="option in filteredList" :class="{'selected': isOptionSelected(option)}" @click="toggleSelection(option)">
+            <div class="dropdown-item vuestic-simple-select__dropdown-item" v-for="option in filteredList" :key="option" :class="{'selected': isOptionSelected(option)}" @click="toggleSelection(option)">
               <span class="ellipsis">{{optionKey ? option[optionKey] : option}}</span>
             </div>
           </div>

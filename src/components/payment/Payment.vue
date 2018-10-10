@@ -38,12 +38,13 @@ export default {
   name: 'Payment',
   components: {
     CardPayment,
-    AchPayment
+    AchPayment,
+    isAch: false
   },
   data () {
     return {
       me: this.$store.getters['account/myself'],
-      isLoading: false
+      isLoading: false,
     }
   },
   methods: {
@@ -51,9 +52,12 @@ export default {
       let that = ''
       if (this.$refs.tabs.currentActive === 'Credit card payment') {
         that = this.$refs.card_payment
-      } else { that = this.$refs.ach_payment }
+        this.isAch = false
+      } else {
+        that = this.$refs.ach_payment
+        this.isAch = true
+      }
 
-      console.log(that)
       Object.keys(that.formFields).map(field => {
         that.validateFormField(field)
       })
@@ -67,7 +71,7 @@ export default {
           const stripeToken = await that.completedData()
           const { stripePaymentToken } = stripeToken
           if (stripePaymentToken) {
-            await this.updateApi(stripeToken)
+            await this.updateApi(stripePaymentToken)
           } else {
             this.isLoading = false
           }
@@ -76,19 +80,20 @@ export default {
         console.log('extra error')
       }
     },
-    async updateApi (value) {
+    async updateApi (stripePaymentToken) {
       const { userId, accessToken } = this.me
       try {
         const { error } = await new Proxy('updatePayment.php?', {
           userId,
           accessToken,
-          stripePaymentToken: value
+          stripePaymentToken,
+          isACH: this.isAch
         }).submit('post')
         if (error) {
           this.$store.dispatch('auth/notification', {
             type: 'ERROR',
             title: 'SERVER ERROR',
-            message: 'Oops, Please try again later.'
+            message: error
           })
         } else {
           await this.$store.dispatch('account/me', {

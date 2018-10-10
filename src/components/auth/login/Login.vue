@@ -58,7 +58,7 @@ export default {
       try {
         await this.$validator.validateAll() && this.$store.dispatch('auth/login', this.user)
       } catch (e) {
-        console.log(e.message)
+        console.log('extra error')
       }
     },
   }

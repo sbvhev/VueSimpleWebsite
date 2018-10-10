@@ -69,8 +69,15 @@ export default {
         {
           label: 'Credit Card',
           slot: 'page3',
+          onNext: () => {
+            // manual validation occur
+            const that = this.$refs.registerStepOne
+            Object.keys(that.formFields).map(field => {
+              that.validateFormField(field)
+            })
+          },
           isValid: async () => {
-            const that = this.$refs.registerStepThree
+            let that = this.$refs.registerStepThree
             Object.keys(that.formFields).map(field => {
               that.validateFormField(field)
             })
@@ -78,8 +85,10 @@ export default {
             const validOk = Object.keys(that.formFields).every(field => {
               return that.isFormFieldValid(field)
             })
+            let wizard = this.$refs.wizard
             if (validOk) {
               try {
+                wizard.signupBtn.loading = true
                 const stripeToken = await that.completedData()
                 const { stripePaymentToken } = stripeToken
                 if (stripePaymentToken) {
@@ -87,12 +96,14 @@ export default {
                   await this.$store.dispatch('auth/register', this.finalModel)
                   this.finalModel = []
                 }
+                wizard.signupBtn.loading = false
               } catch (err) {
                 this.$store.dispatch('auth/notification', {
                   type: 'ERROR',
                   title: 'SERVER ERROR',
                   message: 'Oops, Please try again later.'
                 })
+                wizard.signupBtn.loading = false
               }
             }
             return false

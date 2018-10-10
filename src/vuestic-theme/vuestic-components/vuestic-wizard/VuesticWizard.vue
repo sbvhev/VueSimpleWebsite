@@ -15,7 +15,7 @@
     </div>
 
     <div class="wizard-body">
-      <div class="wizard-body-step" v-for="step in steps" v-show="isStepShown(step)">
+      <div class="wizard-body-step" v-for="(step, index) in steps" v-show="isStepShown(step)" :key="index">
         <slot :name="step.slot" class="step-content"></slot>
       </div>
 
@@ -38,9 +38,12 @@
         </div>
 
         <div class="btn-container" v-if="currentStep == steps.length - 1">
-          <button  class="btn btn-primary wizard-next pull-right final-step" @click.prevent="goNext()">
+          <!-- <button  class="btn btn-primary wizard-next pull-right final-step" @click.prevent="goNext()">
             {{lastStepLabel}}
-          </button>
+          </button> -->
+          <vue-ladda :loading="signupBtn.loading" :key="signupBtn.dataStyle" :data-style="signupBtn.dataStyle" class="btn btn-primary wizard-next pull-right final-step" @click.prevent="goNext()">
+            {{lastStepLabel}}
+          </vue-ladda>
         </div>
       </div>
     </div>
@@ -53,6 +56,7 @@
   import RichVerticalIndicator from './indicators/RichVerticalIndicator.vue'
   import SimpleVerticalIndicator from './indicators/SimpleVerticalIndicator.vue'
   import WizardOrientationHandler from './WizardOrientationHandler'
+  import VueLadda from 'vue-ladda'
 
   export default {
     name: 'vuestic-wizard',
@@ -76,14 +80,20 @@
         wizardCompleted: false,
         wizardCompletedSlotName: 'wizardCompleted',
         orientationBreakPoint: 767, // TODO: into config,
-        computedLayout: this.wizardLayout
+        computedLayout: this.wizardLayout,
+        signupBtn: {
+          loading: false,
+          dataStyle: 'zoom-in',
+          progress: 0
+        }
       }
     },
     components: {
       SimpleHorizontalIndicator,
       RichHorizontalIndicator,
       RichVerticalIndicator,
-      SimpleVerticalIndicator
+      SimpleVerticalIndicator,
+      VueLadda
     },
     directives: {
       orientationHandler: WizardOrientationHandler
@@ -110,7 +120,9 @@
       goNext () {
         this.currentStepOnNext()
         if (this.isCurrentStepValid()) {
-          if (!this.isLastStep()) { this.currentStep++ }
+          if (!this.isLastStep()) {
+            this.currentStep++
+          }
         }
       },
       goBack () {
@@ -149,7 +161,7 @@
         this.currentStep = 0
         this.wizardCompleted = false
         this.$emit('wizardReset')
-      }
+      },
     }
   }
 </script>

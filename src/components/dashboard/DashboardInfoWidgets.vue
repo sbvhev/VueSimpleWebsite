@@ -149,8 +149,4 @@ export default {
     }
   }
 }
-
-.fa-line-chart {
-
-}
 </style>

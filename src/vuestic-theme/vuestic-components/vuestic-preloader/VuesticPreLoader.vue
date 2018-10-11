@@ -73,7 +73,7 @@
       }
     },
     mounted () {
-      this.context = this.$refs.canvas.getContext('2d')
+      // this.context = this.$refs.canvas.getContext('2d')
       this.points = this.points.map(point => {
         return {
           lighten: 8,
@@ -83,7 +83,7 @@
       for (let i = 1; i <= 7; i++) {
         this.points[this.mainIndex - i].lighten = i
       }
-      this.draw()
+      // this.draw()
       this.animate()
     },
     data () {

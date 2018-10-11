@@ -82,7 +82,7 @@
 import stripeAsPromised from 'stripe-as-promised'
 
 export default {
-  name: 'Step3',
+  name: 'step3',
   components: {
   },
   data () {

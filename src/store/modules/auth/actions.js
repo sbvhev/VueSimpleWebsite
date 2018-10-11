@@ -46,7 +46,7 @@ export const register = async ({ commit }, user) => {
       await store.dispatch('account/me', response)
       Vue.router.push({ name: 'dashboard' })
     }
-  } catch ({ message }) {
+  } catch (err) {
     commit(types.NOTIFICATION, {
       type: 'ERROR',
       title: 'SERVER ERROR',
@@ -75,7 +75,7 @@ export const login = async ({ commit }, user) => {
       await store.dispatch('account/me', response)
       Vue.router.push({ name: 'dashboard' })
     }
-  } catch ({ message }) {
+  } catch (err) {
     commit(types.NOTIFICATION, {
       type: 'ERROR',
       title: 'SERVER ERROR',

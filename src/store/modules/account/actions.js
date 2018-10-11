@@ -28,7 +28,7 @@ export const me = async ({ commit }, infoWithToken) => {
       const myself = { ...infoWithToken, ...response }
       commit(types.ME, myself)
     }
-  } catch ({ message }) {
+  } catch (err) {
     commit(
       `account/${NOTIFICATION}`,
       {

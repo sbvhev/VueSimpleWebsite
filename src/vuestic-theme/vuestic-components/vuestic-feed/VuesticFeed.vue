@@ -4,7 +4,7 @@
     <div class="post" v-for="post in posts" :class="{last: posts.indexOf(post) === posts.length - 1}" :key="post">
       <div class="photo-container"></div>
       <div class="underscored">
-        <span class="text">{{post}}</span>
+        <span class="text">{{changeUnicodeString(post)}}</span>
         <button v-on:click="removePost(post)" class="btn btn-micro btn-primary btn-with-icon close-btn rounded-icon">
           <i class="ion-md-close ion"></i>
         </button>
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+  import unicodestring from 'unicodechar-string'
+
   export default {
     name: 'vuestic-feed',
     props: ['initialPosts'],
@@ -26,6 +28,9 @@
           }
         }
         this.posts = result
+      },
+      changeUnicodeString (str) {
+        return unicodestring(str)
       }
     },
     data () {

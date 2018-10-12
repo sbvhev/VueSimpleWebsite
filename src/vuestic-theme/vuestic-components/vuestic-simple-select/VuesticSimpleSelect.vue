@@ -9,7 +9,7 @@
             v-model="displayValue"
             :name="name"
             :options="options"
-            id="selectInput">
+            :id="label">
           <label class="control-label">{{label}}</label><i class="bar" />
           <small v-show="hasErrors()" class="help text-danger">
             {{ showRequiredError() }}

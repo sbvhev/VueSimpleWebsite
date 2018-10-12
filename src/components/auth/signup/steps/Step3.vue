@@ -5,8 +5,8 @@
         <fieldset>
           <div class="form-group">
             <div class="input-group">
-              <input id="simple-input" v-model="address_city" required/>
-              <label class="control-label" for="simple-input">City</label><i class="bar"></i>
+              <input id="addressCity" v-model="address_city" required/>
+              <label class="control-label" for="addressCity">City</label><i class="bar"></i>
             </div>
           </div>
         </fieldset>
@@ -16,8 +16,8 @@
         <fieldset>
           <div class="form-group">
             <div class="input-group">
-              <input id="simple-input" v-model="address_state" required/>
-              <label class="control-label" for="simple-input">State</label><i class="bar"></i>
+              <input id="addressState" v-model="address_state" required/>
+              <label class="control-label" for="addressState">State</label><i class="bar"></i>
             </div>
           </div>
         </fieldset>

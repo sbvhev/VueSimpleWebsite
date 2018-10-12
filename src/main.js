@@ -20,7 +20,7 @@ import CxltToastr from 'cxlt-vue2-toastr'
 import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 const toastrConfigs = {
   position: 'top right',
-  hideDuration: 800,
+  hideDuration: 1000,
   timeOut: 3000,
   showMethod: 'fadeInRight',
   hideMethod: 'fadeOutDown'

@@ -248,4 +248,10 @@
       padding: $wizard-body-step-v-padding $wizard-body-hl-step-h-padding;
     }
   }
+
+  .btn.btn-primary.ladda-button {
+    padding: 1.1rem 3.9rem;
+    border-radius: 1.875rem;
+    font-size: 1rem;
+  }
 </style>

@@ -6,7 +6,8 @@
         <router-view></router-view>
       </div>
       <div class="auth-wallpaper col-6 d-none d-lg-flex">
-        <div class="oblique"></div>
+        <!-- <div class="i-vuestic-back"></div> -->
+        <canvas id="leonSketch"></canvas>
         <router-link class="i-vuestic" :to="{path: '/'}"></router-link>
       </div>
     </div>
@@ -14,13 +15,23 @@
 </template>
 
 <script>
-
+import leonSketch from './leonSketch'
 export default {
-  name: 'AuthLayout'
+  name: 'AuthLayout',
+  mounted () {
+    leonSketch()
+  }
 }
 </script>
 
 <style lang="scss">
+  canvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+  }
   .auth-layout {
     height: 100vh;
     margin: 0;
@@ -46,7 +57,7 @@ export default {
         background-color: white;
       }
       .auth-wallpaper {
-        background-color: $top-nav-bg;
+        background: linear-gradient(to bottom right, #bbf3cd, #007f0a);
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -55,14 +66,6 @@ export default {
           z-index: 2;
           height: $auth-wallpaper-ivuestic-h;
           width: 100%;
-        }
-        .oblique {
-          position: absolute;
-          background-color: $auth-wallpaper-oblique-line;
-          left: calc(50% - 27%/2);
-          transform: rotate(15deg);
-          width: 27%;
-          height: 115%;
         }
       }
     }

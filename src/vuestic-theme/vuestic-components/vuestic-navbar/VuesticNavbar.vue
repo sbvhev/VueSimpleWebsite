@@ -24,6 +24,9 @@
 </script>
 
 <style lang="scss">
+  .navbar-brand {
+    padding-top: 0.9rem !important;
+  }
   .vuestic-navbar {
     .layout-fixed & {
       position: fixed;

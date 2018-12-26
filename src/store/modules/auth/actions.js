@@ -72,6 +72,7 @@ export const login = async ({ commit }, user) => {
       })
     } else {
       commit(types.LOGIN, response)
+      localStorage.setItem('employerName', response.employerName)
       await store.dispatch('account/me', response)
       Vue.router.push({ name: 'dashboard' })
     }

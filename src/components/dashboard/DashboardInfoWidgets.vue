@@ -4,11 +4,11 @@
       <vuestic-widget class="info-widget brand-primary">
         <div class="info-widget-inner">
           <div class="stats">
-            <h1 class="stats-number">
+            <h1 class="stats-number pt-2">
               <!-- <i class="ion ion-md-arrow-up text-primary stats-icon"></i> -->
               {{ statsDatas[0]['value'] }}
             </h1>
-            <div class="stats-title">{{ statsDatas[0]['description'] }}</div>
+            <div class="stats-title pb-3">{{ statsDatas[0]['description'] }}</div>
           </div>
         </div>
       </vuestic-widget>
@@ -17,13 +17,10 @@
       <vuestic-widget class="info-widget brand-primary">
         <div class="info-widget-inner">
           <div class="stats">
-            <div class="stats-number">
-              <div>
-                <i class="fa fa-unsorted"></i>
-              </div>
+            <div class="stats-number pt-2">
               {{ statsDatas[1]['value'] }}
             </div>
-            <div class="stats-title">{{ statsDatas[1]['description'] }}</div>
+            <div class="stats-title pb-3">{{ statsDatas[1]['description'] }}</div>
           </div>
         </div>
       </vuestic-widget>
@@ -33,13 +30,10 @@
         <div class="info-widget-inner">
           <div class="info-widget-inner has-chart">
             <div class="stats">
-              <div class="stats-number">
+              <div class="stats-number pt-2">
                 {{ statsDatas[2]['value'] }}
               </div>
-              <div class="stats-title">{{ statsDatas[2]['description'] }}</div>
-            </div>
-            <div class="chart-container">
-              <vuestic-progress-bar type="circle" :value="70" theme="Gray" backgroundTheme="Primary" />
+              <div class="stats-title pb-3">{{ statsDatas[2]['description'] }}</div>
             </div>
           </div>
         </div>
@@ -49,11 +43,11 @@
       <vuestic-widget class="info-widget brand-primary">
         <div class="info-widget-inner">
           <div class="stats">
-            <div class="stats-number">
+            <div class="stats-number pt-2">
               <!-- <i class="ion ion-md-people stats-icon icon-wide"></i> -->
               {{ statsDatas[3]['value'] }}
             </div>
-            <div class="stats-title">{{ statsDatas[3]['description'] }}</div>
+            <div class="stats-title pb-3">{{ statsDatas[3]['description'] }}</div>
           </div>
         </div>
       </vuestic-widget>
@@ -117,7 +111,7 @@ export default {
   width: 100%;
 
   &.has-chart {
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .stats {
@@ -136,6 +130,7 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 3.625rem;
+  font-weight: bold !important;
   margin-bottom: 0.5rem;
 
   .stats-icon {

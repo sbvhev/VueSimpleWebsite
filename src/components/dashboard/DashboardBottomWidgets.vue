@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLoaded" class="row bottom-widgets">
     <div class="col-md-6 d-flex">
-      <vuestic-widget class="no-h-padding no-v-padding">
+      <vuestic-widget class="no-h-padding no-v-padding activity-feed" :headerText="'Activity Feed'">
         <vuestic-feed :initialPosts="posts"></vuestic-feed>
       </vuestic-widget>
     </div>
@@ -75,7 +75,7 @@ export default {
         if (error) {
           this.posts = []
         } else {
-          this.posts = feed.splice(0, 3)
+          this.posts = feed.splice(0, 100)
           this.isLoaded = true
         }
       } catch (error) {
@@ -96,6 +96,13 @@ export default {
     & > div {
       width: 100%;
     }
+  }
+}
+/deep/.activity-feed {
+  .widget-body {
+    max-height: 200px;
+    overflow-y: scroll;
+    margin: 5px;
   }
 }
 </style>

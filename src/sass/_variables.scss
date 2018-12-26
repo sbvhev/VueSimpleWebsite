@@ -126,7 +126,7 @@ $auth-content-padding-t: 2.875rem;
 
 //$text-color:            $gray !default;
 
-$font-family-sans-serif: 'Source Sans Pro', sans-serif !default;
+$font-family-sans-serif: 'Nunito', sans-serif !default;
 
 $font-size-root: 16px;
 
@@ -181,7 +181,7 @@ $sidebar-box-shadow: 0px 8px 14.72px 1.28px rgba(#65a977, 0.3);
 $widget-bg: $white;
 $widget-padding: 1.5625rem;
 $widget-larger-padding: 45px;
-$widget-box-shadow: 0px 4px 70px -18px rgba(112, 112, 112, 1);
+$widget-box-shadow: 0 0 20px 0 #c3c3c3;
 $widget-danger-shadow: 0px 4px 70px -16px $brand-danger;
 $widget-info-shadow: 0px 4px 70px -16px $brand-info;
 $widget-viewport-height: $sidebar-viewport-height;

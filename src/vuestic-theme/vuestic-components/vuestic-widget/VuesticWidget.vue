@@ -28,6 +28,7 @@
     border: thin solid #afafaf;
     border-radius: 16px;
     padding: 0;
+    font-family: 'Nunito', sans-serif;
 
     &.no-header {
       .widget-body {
@@ -77,6 +78,10 @@
       &.brand-danger {
         border-top-color: $brand-danger;
       }
+
+      .widget-body {
+        padding: 0;
+      }
     }
 
     .widget-body {
@@ -85,6 +90,7 @@
     }
 
     .widget-header {
+      font-family: 'Nunito', sans-serif;
       height: $widget-header-height;
       padding: 0 $widget-padding;
       border-bottom: $widget-header-border;

@@ -46,7 +46,9 @@
       @vuetable:pagination-data="onPaginationData"
       @vuetable:loading="onLoading"
       @vuetable:loaded="onLoaded"
-    />
+      @vuetable:cell-clicked="onCellClicked"
+    >
+    </vuetable>
     <div class="d-flex justify-content-center mb-4">
       <vuetable-pagination ref="pagination"
                            :css="css.pagination"
@@ -232,6 +234,11 @@
     },
 
     methods: {
+      onCellClicked (row) {
+        if(row.providerId && row.providerAccessToken) {
+          window.open('https://provider-dev.myleon.co?id_token=' + row.providerAccessToken + '&provider_id=' + row.providerId)
+        }
+      },
       onFilterSet (filterText) {
         this.filterText = filterText
         Vue.nextTick(() => this.$refs.vuetable.refresh())
@@ -286,6 +293,10 @@
 </script>
 
 <style lang="scss">
+  .vuestic-data-table .vuetable-body tr td:nth-child(2) {
+    color: #4ab2e3;
+    cursor: pointer;
+  }
   .vuestic-data-table {
     min-height: 24rem;
 

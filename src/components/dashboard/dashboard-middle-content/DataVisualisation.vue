@@ -68,12 +68,13 @@ export default {
           userId,
           accessToken
         }).submit('get')
+        console.log('usage: ', usage)
         if (error) {
           this.tableData = []
         } else {
           this.tableData = { data: usage }
           this.normaliztion(usage)
-          this.tableFields = [...FieldsDef.tableFields, 'print_amount']
+          this.tableFields = [...FieldsDef.tableFields, 'spend']
           this.isLoaded = true
         }
       } catch (error) {

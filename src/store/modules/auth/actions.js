@@ -98,6 +98,7 @@ export const logout = ({ commit }) => {
   Vue.router.push({
     name: 'login'
   })
+  location.reload()
 }
 
 export const isProcessing = ({ commit }, value) => {

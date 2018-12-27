@@ -91,7 +91,7 @@
     .dropdown.navbar-dropdown {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
 
       .dropdown-toggle {
         display: flex;

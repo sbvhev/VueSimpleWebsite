@@ -60,7 +60,7 @@
 
     .profile-section-avatar-container {
       display: inline-block;
-      width: 120px;
+      width: auto;
       overflow: hidden;
 
       img {

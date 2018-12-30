@@ -1,13 +1,8 @@
 <template>
   <div v-if="isLoaded" class="row bottom-widgets">
-    <div class="col-md-6 d-flex">
+    <div class="col-md-12 d-flex">
       <vuestic-widget class="no-h-padding no-v-padding activity-feed" :headerText="'Activity Feed'">
         <vuestic-feed :initialPosts="posts"></vuestic-feed>
-      </vuestic-widget>
-    </div>
-    <div class="col-md-6 d-flex">
-      <vuestic-widget class="business-posts">
-        <vuestic-social-news class="vuestic-social-news" :news="news" :url="'http://instagram.com/smartapant'"></vuestic-social-news>
       </vuestic-widget>
     </div>
   </div>

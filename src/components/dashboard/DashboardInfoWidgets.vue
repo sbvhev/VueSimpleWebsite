@@ -129,7 +129,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
 

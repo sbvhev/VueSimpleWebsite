@@ -37,7 +37,7 @@
       :fields="tableFields"
       :dataManager="dataManager"
       :css="css.table"
-      dataPath="data"
+      data-path="data"
       :paginationPath="paginationPathComputed"
       :appendParams="moreParams"
       :perPage="perPage"
@@ -195,7 +195,6 @@
       },
       filteredTableData () {
         const txt = new RegExp(this.filterText, 'i')
-
         let filteredData = this.tableData.data.slice()
 
         filteredData = this.tableData.data.filter((item) => {
@@ -226,6 +225,7 @@
     },
 
     created () {
+      console.log('this.tableData', this.data)
       this.perPage = this.defaultPerPageComputed
     },
 

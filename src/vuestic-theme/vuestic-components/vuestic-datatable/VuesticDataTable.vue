@@ -24,7 +24,7 @@
           slot="loading"
           :animation-duration="2500"
           :size="70"
-          color="#4ae387"
+          color="#DF3E3E"
         />
       </slot>
     </div>
@@ -334,6 +334,10 @@
       top: 40%;
       left: 50%;
     }
+  }
+
+  .datatable-controls {
+    display: none !important;
   }
 
   .data-loading {

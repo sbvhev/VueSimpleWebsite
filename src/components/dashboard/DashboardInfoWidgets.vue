@@ -129,8 +129,8 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 3.625rem;
-  font-weight: bold !important;
+  font-size: 3rem;
+  font-weight: 400;
   margin-bottom: 0.5rem;
 
   .stats-icon {

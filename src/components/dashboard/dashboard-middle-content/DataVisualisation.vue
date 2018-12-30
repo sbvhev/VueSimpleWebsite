@@ -88,8 +88,19 @@ export default {
     normaliztion (data) {
       const palette = this.$store.getters['shared/palette']
       const colorType = [palette.info, palette.warning, palette.primary, palette.fontColor]
-      for (const index in data) {
-        const ele = data[index]
+      data.sort((a, b) => { return b.value - a.value })
+      let _data = []
+      let sum = 0
+      data.forEach((element, index) => {
+        if (index >= 7) {
+          sum += parseInt(element.value)
+        } else {
+          _data.push(element)
+        }
+      })
+      _data.push({ name: 'Others', value: sum })
+      for (const index in _data) {
+        const ele = _data[index]
         this.donutChartData.labels = [...this.donutChartData.labels, ele.name]
         this.donutChartData.datasets[0].backgroundColor = [...this.donutChartData.datasets[0].backgroundColor, colorType[index % 4]]
         this.donutChartData.datasets[0].data = [...this.donutChartData.datasets[0].data, ele.value]

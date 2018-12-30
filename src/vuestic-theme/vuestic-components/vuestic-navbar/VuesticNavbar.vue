@@ -26,6 +26,9 @@
 <style lang="scss">
   .navbar-brand {
     padding-top: 0.9rem !important;
+    @media only screen and (max-width: 768px){
+      margin-left: -50px;
+    }
   }
   .vuestic-navbar {
     .layout-fixed & {
@@ -39,6 +42,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      @media only screen and (max-width: 768px) {
+        justify-content: flex-start;
+      }
     }
 
     .vuestic-navbar__content {

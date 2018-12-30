@@ -6,12 +6,12 @@
           <div slot="page1" class="form-wizard-tab-content">
             <Step1 ref="registerStepOne"></Step1>
           </div>
-          <div slot="page2" class="form-wizard-tab-content">
+          <!-- <div slot="page2" class="form-wizard-tab-content">
             <Step2 ref="registerStepTwo"></Step2>
           </div>
           <div slot="page3" class="form-wizard-tab-content">
             <Step3 ref="registerStepThree"></Step3>
-          </div>
+          </div> -->
         </vuestic-wizard>
       </div>
     </div>
@@ -44,7 +44,7 @@ export default {
               that.validateFormField(field)
             })
           },
-          isValid: () => {
+          isValid: async () => {
             // validation check
             const that = this.$refs.registerStepOne
             const validOk = Object.keys(that.formFields).every(field => {
@@ -52,50 +52,13 @@ export default {
             })
 
             // integration step's data
-            validOk && this.mergePartialModels(that.completedData())
-            return validOk
-          }
-        },
-        {
-          label: 'Employee Stipend',
-          slot: 'page2',
-          isValid: () => {
-            // integration step's data
-            const that = this.$refs.registerStepTwo
-            this.mergePartialModels(that.completedData())
-            return true
-          }
-        },
-        {
-          label: 'Credit Card',
-          slot: 'page3',
-          onNext: () => {
-            // manual validation occur
-            const that = this.$refs.registerStepOne
-            Object.keys(that.formFields).map(field => {
-              that.validateFormField(field)
-            })
-          },
-          isValid: async () => {
-            let that = this.$refs.registerStepThree
-            Object.keys(that.formFields).map(field => {
-              that.validateFormField(field)
-            })
-            // validation check
-            const validOk = Object.keys(that.formFields).every(field => {
-              return that.isFormFieldValid(field)
-            })
             let wizard = this.$refs.wizard
             if (validOk) {
               try {
                 wizard.signupBtn.loading = true
-                const stripeToken = await that.completedData()
-                const { stripePaymentToken } = stripeToken
-                if (stripePaymentToken) {
-                  this.mergePartialModels(stripeToken)
-                  await this.$store.dispatch('auth/register', this.finalModel)
-                  this.finalModel = []
-                }
+                this.mergePartialModels(that.completedData())
+                await this.$store.dispatch('auth/register', this.finalModel)
+                this.finalModel = []
                 wizard.signupBtn.loading = false
               } catch (err) {
                 this.$store.dispatch('auth/notification', {
@@ -106,9 +69,61 @@ export default {
                 wizard.signupBtn.loading = false
               }
             }
-            return false
           }
-        }
+        },
+        // {
+        //   label: 'Employee Stipend',
+        //   slot: 'page2',
+        //   isValid: () => {
+        //     // integration step's data
+        //     const that = this.$refs.registerStepTwo
+        //     this.mergePartialModels(that.completedData())
+        //     return true
+        //   }
+        // },
+        // {
+        //   label: 'Credit Card',
+        //   slot: 'page3',
+        //   onNext: () => {
+        //     // manual validation occur
+        //     const that = this.$refs.registerStepOne
+        //     Object.keys(that.formFields).map(field => {
+        //       that.validateFormField(field)
+        //     })
+        //   },
+        //   isValid: async () => {
+        //     let that = this.$refs.registerStepThree
+        //     Object.keys(that.formFields).map(field => {
+        //       that.validateFormField(field)
+        //     })
+        //     // validation check
+        //     const validOk = Object.keys(that.formFields).every(field => {
+        //       return that.isFormFieldValid(field)
+        //     })
+        //     let wizard = this.$refs.wizard
+        //     if (validOk) {
+        //       try {
+        //         wizard.signupBtn.loading = true
+        //         const stripeToken = await that.completedData()
+        //         const { stripePaymentToken } = stripeToken
+        //         if (stripePaymentToken) {
+        //           this.mergePartialModels(stripeToken)
+        //           await this.$store.dispatch('auth/register', this.finalModel)
+        //           this.finalModel = []
+        //         }
+        //         wizard.signupBtn.loading = false
+        //       } catch (err) {
+        //         this.$store.dispatch('auth/notification', {
+        //           type: 'ERROR',
+        //           title: 'SERVER ERROR',
+        //           message: 'Oops, Please try again later.'
+        //         })
+        //         wizard.signupBtn.loading = false
+        //       }
+        //     }
+        //     return false
+        //   }
+        // }
       ]
     },
     ...mapGetters({

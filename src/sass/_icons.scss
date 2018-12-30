@@ -17,6 +17,7 @@
   width: 129px;
   height: 15.4px;
   background: url('assets/icons/vuestic.svg') no-repeat center center;
+  background-size: 129px;
 }
 
 .i-vuestic-arrow {
@@ -31,6 +32,9 @@
   width: 132px;
   height: 28px;
   background: url('assets/icons/vuesticnav.svg') no-repeat center center;
+  @media only screen and (max-width: 768px) {
+    height: 56px;
+  }
 }
 
 .i-vuestic-back {

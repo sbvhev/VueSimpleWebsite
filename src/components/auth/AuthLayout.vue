@@ -57,7 +57,7 @@ export default {
         background-color: white;
       }
       .auth-wallpaper {
-        background: linear-gradient(to bottom right, #bbf3cd, #007f0a);
+        background: linear-gradient(to bottom right, #FFB87F, #B2005C);
         overflow: hidden;
         display: flex;
         align-items: center;

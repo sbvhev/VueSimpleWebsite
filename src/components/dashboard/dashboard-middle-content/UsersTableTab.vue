@@ -62,7 +62,7 @@ export default {
         } else {
           this.tableData = { data: users }
           const elements = Object.keys(users[0]).filter(
-            ele => ele !== 'name'
+            ele => ele !== 'name' && ele !== 'row'
           ).map((ele, index) => ({
             name: ele,
             title: ele

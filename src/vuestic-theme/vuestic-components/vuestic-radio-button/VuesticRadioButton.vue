@@ -3,7 +3,7 @@
        :class="additionalClasses">
     <input class="form-check-input" type="radio" :name="name" :id="id"
            :value="value" :checked="checkState" @change="onChange"
-           :disabled="disabled">
+           :disabled="disabled" @click="onClickRadio">
     <label class="form-check-label" :for="id">
       <span class="abc-label-text">{{ label }}</span>
     </label>
@@ -63,6 +63,10 @@
       },
       toggle () {
         this.$emit('input', this.checkState ? '' : this.value)
+      },
+      onClickRadio (e) {
+        console.log(e)
+        this.$emit('click', true)
       }
     },
     computed: {

@@ -1,9 +1,9 @@
 export default {
   tableFields: [
     {
-      name: '__component:badge-column',
-      title: '',
-      dataClass: 'text-center'
+      name: 'row',
+      title: 'row',
+      sortField: 'row'
     },
     {
       name: 'name',

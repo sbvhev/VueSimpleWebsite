@@ -74,7 +74,7 @@ export default {
         } else {
           this.tableData = { data: usage }
           this.normaliztion(usage)
-          this.tableFields = [...FieldsDef.tableFields, 'spend']
+          this.tableFields = ['row', 'name', 'spend']
           this.isLoaded = true
         }
       } catch (error) {
